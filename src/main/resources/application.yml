@@ -1,0 +1,207 @@
+spring:
+  profiles:
+    active: kafkaTosnowflake
+  main:
+    web-environment: false
+
+---
+spring:
+  profiles: dev
+
+appConfig:
+  appName: Octopus
+  executionMode: local[*]
+
+readerType: dfs
+processorType: default
+enableNS: true
+writerType: dfs
+errorFile:
+enableErrorRoute: false
+sourceRecordsContainsExpn:
+enableLoadDate: true
+
+hiveConfig:
+  sourceReaderSQL:
+  databaseName:
+  outTableName:
+  partitionColumn:
+  saveMode:
+
+snowflakeConfig:
+  connectionURL: jdbc:snowflake://https://test.us-east-1.privatelink.snowflakecomputing.com
+  userName: S_GEN_DUMMY
+  password:
+  database: DUMMY
+  warehouse: DUMMY_XSMALL_WH
+  role: APP_SNOWFLAKE_DUMMY
+  schema: public
+  jdbcDriver: net.snowflake.client.jdbc.SnowflakeDriver
+  inTableName:
+  outTableName: TEST_EVENTS
+  primaryKey:
+    - id
+  partitionColumn:
+  ignoreNull: false
+
+fileConfig:
+  inputFile:
+  outputFile:
+  fileType:
+  headerRequired:
+
+kafkaConfig:
+  bootstrapServers: "localhost:9092"
+  inTopic: "dev_in"
+  successOutTopic: "dev_success_out"
+  errorOutTopic: "dev_error_out"
+  singleOutTopic:
+  startingOffsets: "latest"
+  successCheckpointLocation: src/main/resources/checkpoint/sucess
+  errorCheckpointLocation: src/main/resources/checkpoint/error
+  singleCheckpointLocation:
+  outputMode: "update"
+
+dfsConfig:
+  inputFile: src/main/resources/data/input/test.txt
+  successOutFile:
+  errorOutFile:
+  outputFile: src/main/resources/data/output
+  writeFormat: csv
+  fieldDelim: /
+  successCheckpointLocation:
+  errorCheckpointLocation:
+  singleCheckpointLocation:
+
+transformationTempTable: test_tmp
+transformationSQL: "select * from test_tmp"
+
+metadata:
+  columnIndexMap:
+    0:
+      parser: default
+      name: name
+    1:
+      parser: default
+      name: phone
+    2:
+      parser: default
+      name: email
+    3:
+      parser: default
+      name: date
+    4:
+      parser: default
+      name: company
+    5:
+      parser: default
+      name: city
+    6:
+      parser: default
+      name: postal
+    7:
+      parser: default
+      name: country
+---
+spring:
+  profiles: dfsTodfs
+
+appConfig:
+  appName: dynamicJSON
+  executionMode: local[*]
+  keytabUser:
+  keytabLocation:
+  jdbcDriver:
+  connectionURL:
+
+readerType: dfs
+processorType: dynamicjson
+enableNS:
+writerType: dfs
+errorFile:
+enableErrorRoute: true
+sourceRecordsContainsExpn: "\"Source\":\"DRT\""
+enableLoadDate: false
+
+parsingConfig:
+  metadataFile: src/main/resources/data/dynamic-json/test.txt
+  primaryKeys:
+    - MTCN16
+    - Disposition
+  enableDataContainer: false
+
+dfsConfig:
+  inputFile: src/main/resources/data/dynamic-json/input
+  successOutputFile: src/main/resources/data/dynamic-json/out/success
+  errorOutputFile: src/main/resources/data/dynamic-json/out/error
+  outputFile:
+  writeFormat: text
+  fieldDelim: fieldDelimCharDRT
+
+transformationTempTable: test_dnorm_stage_retro_tmp
+transformationSQL: ""
+
+metadata:
+  columnIndexMap:
+    0:
+      parser: default
+      name: value
+---
+spring:
+  profiles: kafkaTosnowflake
+
+appConfig:
+  appName: KafkaToSnowFlake
+  executionMode: local[*]
+
+readerType: kafka
+processorType: default
+enableNS: true
+writerType: snowflake
+errorFile:
+enableErrorRoute: false
+sourceRecordsContainsExpn:
+enableLoadDate: true
+enableJsonToDF: true
+enableJsonParser: true
+
+snowflakeConfig:
+  connectionURL: jdbc:snowflake://https://test.us-east-1.snowflakecomputing.com/
+  userName: test
+  password: test
+  database: PAYMENTS
+  warehouse: COMPUTE_WH
+  role: abc
+  schema: TEST
+  jdbcDriver: net.snowflake.client.jdbc.SnowflakeDriver
+  inTableName:
+  outTableName: test_data
+  primaryKey:
+    - ID
+  partitionColumn:
+  ignoreNull: false
+  successCheckpointLocation: src/main/resources/checkpoint/sucess
+  errorRecordsLocation: src/main/resources/errorData/
+  errorCheckPointLocation: src/main/resources/checkpoint/error
+
+parsingConfig:
+  metadataFile: /Users/312337/Git_Repo/octopus/src/main/resources/snowflake/test-mapping.txt
+  primaryKeys:
+    - ID
+  enableDataContainer: false
+
+kafkaConfig:
+  bootstrapServers: "localhost:9092"
+  inTopic: "test_datamap_input"
+  successOutTopic: "dev_success_out"
+  errorOutTopic: "dev_error_out"
+  singleOutTopic:
+  startingOffsets: "latest"
+  successCheckpointLocation: src/main/resources/checkpoint/sucess
+  errorCheckpointLocation: src/main/resources/checkpoint/error
+  singleCheckpointLocation:
+  outputMode: "update"
+
+transformationTempTable: TEST_TEMP
+transformationSQL: ""
+

@@ -1,0 +1,4 @@
+mtcn:transaction_csntransactionid
+environment:transaction_environment
+messageType:transaction_transactionpurpose
+comment:transaction_comment

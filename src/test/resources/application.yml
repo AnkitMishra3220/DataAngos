@@ -1,0 +1,71 @@
+---
+spring:
+  profiles: test
+
+appConfig:
+  appName: Octopus
+  executionMode: local
+
+processorType: default
+enableNS: true
+readerType: dfs
+writerType: dfs
+errorFile:
+enableErrorRoute: false
+sourceRecordsContainsExpn:
+enableLoadDate: false
+
+
+dfsConfig:
+  inputFile:
+  outputFile:
+  writeFormat:
+  fieldDelim:
+
+fileConfig:
+  inputFile:
+  outputFile:
+  fileType:
+  headerRequired:
+
+kafkaConfig:
+  bootstrapServers: ${spring.embedded.kafka.brokers}
+  inTopic: inTopic
+  successOutTopic:
+  errorOutTopic:
+  singleOutTopic: outTopic
+  startingOffsets: earliest
+  successCheckpointLocation: src/main/resources/checkpoint/sucess
+  errorCheckpointLocation: src/main/resources/checkpoint/error
+  singleCheckpointLocation:
+  outputMode: update
+
+transformationTempTable:
+transformationSQL: ""
+
+metadata:
+  columnIndexMap:
+    0:
+      parser: default
+      name: name
+    1:
+      parser: default
+      name: phone
+    2:
+      parser: default
+      name: email
+    3:
+      parser: default
+      name: date
+    4:
+      parser: default
+      name: company
+    5:
+      parser: default
+      name: city
+    6:
+      parser: default
+      name: postal
+    7:
+      parser: default
+      name: country

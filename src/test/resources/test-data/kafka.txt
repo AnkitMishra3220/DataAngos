@@ -1,0 +1,1 @@
+{"id":"1234","event":"test1","ingestion_timestamp":1591089501544,"amount":"490","dept_code":"I4","city":"pune","state":"MH"}
