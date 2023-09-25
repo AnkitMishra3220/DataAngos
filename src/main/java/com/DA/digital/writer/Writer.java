@@ -1,8 +1,8 @@
 package com.da.digital.writer;
 
-import com.da.digital.exception.OctopusException;
+import com.da.digital.exception.DataAngosException;
 
 public interface Writer<T> {
 
-    void write(T output) throws OctopusException;
+    void write(T output) throws DataAngosException;
 }

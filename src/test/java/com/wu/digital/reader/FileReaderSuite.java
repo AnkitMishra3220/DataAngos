@@ -3,7 +3,7 @@ package com.da.digital.reader;
 import com.da.digital.conf.AppConfig;
 import com.da.digital.conf.FileConfig;
 import com.da.digital.conf.JobContext;
-import com.da.digital.exception.OctopusException;
+import com.da.digital.exception.DataAngosException;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.junit.Assert;
@@ -40,7 +40,7 @@ public class FileReaderSuite {
     private List<Row> listOfRow;
 
     @Before
-    public void setup() throws OctopusException, IOException {
+    public void setup() throws DataAngosException, IOException {
 
         fileConfig.setInputFile("src/test/resources/test-data/test.csv");
         fileConfig.setHeaderRequired("true");

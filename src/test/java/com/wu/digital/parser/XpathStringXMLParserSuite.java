@@ -1,7 +1,7 @@
 package com.da.digital.parser;
 
-import com.da.digital.exception.OctopusErrorCode;
-import com.da.digital.exception.OctopusException;
+import com.da.digital.exception.DataAngosErrorCode;
+import com.da.digital.exception.DataAngosException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -15,7 +15,7 @@ public class XpathStringXMLParserSuite {
     private static final Logger logger = LoggerFactory.getLogger(XpathStringXMLParserSuite.class);
 
     @Test
-    public void parseXMLWithXpath() throws OctopusException {
+    public void parseXMLWithXpath() throws DataAngosException {
 
         String data = "";
 
@@ -23,7 +23,7 @@ public class XpathStringXMLParserSuite {
             data = new String(Files.readAllBytes(Paths.get("src/test/resources/test-data/test.xml")));
         }catch (Exception ex){
             logger.error(ex.getMessage());
-            throw new OctopusException(OctopusErrorCode.IO_FILE_ERROR);
+            throw new DataAngosException(DataAngosErrorCode.IO_FILE_ERROR);
         }
 
         XpathStringXMLParser xpathStringXMLParser = new XpathStringXMLParser();

@@ -1,8 +1,8 @@
 package com.da.digital.writer;
 
 import com.da.digital.conf.SnowFlakeConfigObj;
-import com.da.digital.exception.OctopusErrorCode;
-import com.da.digital.exception.OctopusException;
+import com.da.digital.exception.DataAngosErrorCode;
+import com.da.digital.exception.DataAngosException;
 import com.da.digital.utils.DMLGenerator;
 import org.apache.spark.sql.ForeachWriter;
 import org.apache.spark.sql.Row;
@@ -43,16 +43,16 @@ public class SnowFlakeJDBCSinkWriter extends ForeachWriter<Row> implements Seria
             statement = connection.createStatement();
         } catch (IllegalAccessException e) {
             logger.error(e.getMessage());
-            throw new OctopusException(OctopusErrorCode.SNOWFLAKE_ILLEGAL_ACCESS_ERROR);
+            throw new DataAngosException(DataAngosErrorCode.SNOWFLAKE_ILLEGAL_ACCESS_ERROR);
         } catch (InstantiationException e) {
             logger.error(e.getMessage());
-            throw new OctopusException(OctopusErrorCode.SNOWFLAKE_JDBC_CLASS_INSTANTIATION_ERROR);
+            throw new DataAngosException(DataAngosErrorCode.SNOWFLAKE_JDBC_CLASS_INSTANTIATION_ERROR);
         } catch (SQLException e) {
             logger.error(e.getMessage());
-            throw new OctopusException(OctopusErrorCode.SNOWFLAKE_DATABASE_ACCESS_ERROR);
+            throw new DataAngosException(DataAngosErrorCode.SNOWFLAKE_DATABASE_ACCESS_ERROR);
         } catch (ClassNotFoundException e) {
             logger.error(e.getMessage());
-            throw new OctopusException(OctopusErrorCode.SNOWFLAKE_JDBC_DRIVER_ERROR);
+            throw new DataAngosException(DataAngosErrorCode.SNOWFLAKE_JDBC_DRIVER_ERROR);
         }
         return true;
     }
@@ -65,7 +65,7 @@ public class SnowFlakeJDBCSinkWriter extends ForeachWriter<Row> implements Seria
             statement.executeUpdate(DMLGenerator.generateDMLStmt(value, snowFlakeConfigObj, colList));
         } catch (SQLException e) {
             logger.error(e.getMessage());
-            throw new OctopusException(OctopusErrorCode.SNOWFLAKE_SQL_ERROR);
+            throw new DataAngosException(DataAngosErrorCode.SNOWFLAKE_SQL_ERROR);
             }
     }
 
@@ -76,7 +76,7 @@ public class SnowFlakeJDBCSinkWriter extends ForeachWriter<Row> implements Seria
             connection.close();
         } catch (SQLException e) {
             logger.error(e.getMessage());
-            throw new OctopusException(OctopusErrorCode.SNOWFLAKE_DATABASE_ACCESS_ERROR);
+            throw new DataAngosException(DataAngosErrorCode.SNOWFLAKE_DATABASE_ACCESS_ERROR);
 
         }
     }

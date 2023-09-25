@@ -9,7 +9,7 @@ spring:
   profiles: dev
 
 appConfig:
-  appName: Octopus
+  appName: DataAngos
   executionMode: local[*]
 
 readerType: dfs
@@ -185,7 +185,7 @@ snowflakeConfig:
   errorCheckPointLocation: src/main/resources/checkpoint/error
 
 parsingConfig:
-  metadataFile: /Users/312337/Git_Repo/octopus/src/main/resources/snowflake/test-mapping.txt
+  metadataFile: /Users/312337/Git_Repo/DataAngos/src/main/resources/snowflake/test-mapping.txt
   primaryKeys:
     - ID
   enableDataContainer: false

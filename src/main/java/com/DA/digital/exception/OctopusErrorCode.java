@@ -3,7 +3,7 @@ package com.da.digital.exception;
 
 import java.sql.SQLException;
 
-public enum OctopusErrorCode {
+public enum DataAngosErrorCode {
 
     UNKNOWN_FILE_TYPE(4001, "Unknown File Type in Application YML"),
     UNKNOWN_PROCESSOR_TYPE(4002, "Unknown Processor Type in Application YML"),
@@ -31,7 +31,7 @@ public enum OctopusErrorCode {
     private int errorCode;
     private String errorMessage;
 
-    OctopusErrorCode(int errorCode, String errorMessage) {
+    DataAngosErrorCode(int errorCode, String errorMessage) {
         this.errorCode = errorCode;
         this.errorMessage = errorMessage;
     }

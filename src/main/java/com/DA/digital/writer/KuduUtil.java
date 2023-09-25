@@ -1,8 +1,8 @@
 package com.da.digital.writer;
 
 import com.da.digital.conf.KuduConfig;
-import com.da.digital.exception.OctopusErrorCode;
-import com.da.digital.exception.OctopusException;
+import com.da.digital.exception.DataAngosErrorCode;
+import com.da.digital.exception.DataAngosException;
 import org.apache.kudu.client.CreateTableOptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +20,7 @@ public class KuduUtil implements Serializable {
     }
 
 
-    public static boolean createKuduTable(KuduConfig kuduConfig, String kuduTableName,StructType schema) throws OctopusException {
+    public static boolean createKuduTable(KuduConfig kuduConfig, String kuduTableName,StructType schema) throws DataAngosException {
 
 
         if (!KuduUtil.existKuduTable(kuduConfig,kuduTableName)) {
@@ -36,7 +36,7 @@ public class KuduUtil implements Serializable {
                         , createTableOptions);
                 return true;
             } catch (Exception ex) {
-               throw new OctopusException(OctopusErrorCode.KUDU_TABLE_CREATE_ERROR);
+               throw new DataAngosException(DataAngosErrorCode.KUDU_TABLE_CREATE_ERROR);
             }
         } else {
             String info = "Error in creating table, as table already exists with" + kuduTableName;

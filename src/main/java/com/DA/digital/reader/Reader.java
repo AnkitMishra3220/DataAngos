@@ -1,8 +1,8 @@
 package com.da.digital.reader;
 
-import com.da.digital.exception.OctopusException;
+import com.da.digital.exception.DataAngosException;
 
 public interface Reader<T> {
 
-    T read() throws OctopusException;
+    T read() throws DataAngosException;
 }

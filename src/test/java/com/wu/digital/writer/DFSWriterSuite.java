@@ -5,7 +5,7 @@ import com.da.digital.TestUtil;
 import com.da.digital.conf.AppConfig;
 import com.da.digital.conf.DFSConfig;
 import com.da.digital.conf.JobContext;
-import com.da.digital.exception.OctopusException;
+import com.da.digital.exception.DataAngosException;
 import org.apache.spark.rdd.RDD;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
@@ -60,7 +60,7 @@ public class DFSWriterSuite {
 
 
     @Before
-    public void setup() throws OctopusException {
+    public void setup() throws DataAngosException {
         inputDS = sparkSession.read().format("csv").load("src/test/resources/test-data/test.csv");
         lineCount = inputDS.count();
         testUtil.deleteRecursively(new File(outFile));
@@ -69,7 +69,7 @@ public class DFSWriterSuite {
 
 
     @Test
-    public void testCSVWriter() throws OctopusException {
+    public void testCSVWriter() throws DataAngosException {
 
         outFile = outFile + "csv";
         dfsConfig.setWriteFormat("csv");
@@ -93,7 +93,7 @@ public class DFSWriterSuite {
     }
 
     @Test
-    public void testJSONWriter() throws OctopusException {
+    public void testJSONWriter() throws DataAngosException {
 
         outFile = outFile + "json";
         dfsConfig.setWriteFormat("json");
@@ -115,7 +115,7 @@ public class DFSWriterSuite {
     }
 
     @Test
-    public void testParquetWriter() throws OctopusException {
+    public void testParquetWriter() throws DataAngosException {
 
         testUtil.deleteRecursively(new File(outFile));
         outFile = outFile + parquet;
@@ -138,7 +138,7 @@ public class DFSWriterSuite {
     }
 
     @Test
-    public void testTextWriter() throws OctopusException {
+    public void testTextWriter() throws DataAngosException {
 
         outFile = outFile + "text";
         dfsConfig.setWriteFormat("text");

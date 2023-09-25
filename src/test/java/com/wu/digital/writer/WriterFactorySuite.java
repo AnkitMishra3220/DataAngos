@@ -3,7 +3,7 @@ package com.da.digital.writer;
 import com.da.digital.conf.AppConfig;
 import com.da.digital.conf.DFSConfig;
 import com.da.digital.conf.JobContext;
-import com.da.digital.exception.OctopusException;
+import com.da.digital.exception.DataAngosException;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.junit.Assert;
@@ -39,7 +39,7 @@ public class WriterFactorySuite {
     private WriterFactory writerFactory;
 
     @Test
-    public void testWriterFactory() throws OctopusException {
+    public void testWriterFactory() throws DataAngosException {
         Assert.assertEquals("com.da.digital.writer.DFSWriter",writerFactory.getWriterObject().getClass().getName());
     }
 }

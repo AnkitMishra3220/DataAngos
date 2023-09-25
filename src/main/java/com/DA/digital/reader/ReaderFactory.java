@@ -1,8 +1,8 @@
 package com.da.digital.reader;
 
 import com.da.digital.conf.AppConfig;
-import com.da.digital.exception.OctopusErrorCode;
-import com.da.digital.exception.OctopusException;
+import com.da.digital.exception.DataAngosErrorCode;
+import com.da.digital.exception.DataAngosException;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +23,13 @@ public class ReaderFactory implements Serializable {
     @Autowired
     private Map<String, Reader<Dataset<Row>>> mapOfReader;
 
-    public Reader<Dataset<Row>> getReaderObject() throws OctopusException {
+    public Reader<Dataset<Row>> getReaderObject() throws DataAngosException {
 
         try {
             return mapOfReader.get(readerType.toLowerCase());
 
         }catch (NullPointerException e){
-            throw new OctopusException(OctopusErrorCode.UNKNOWN_READER_TYPE);
+            throw new DataAngosException(DataAngosErrorCode.UNKNOWN_READER_TYPE);
         }
 
     }

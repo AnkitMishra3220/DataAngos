@@ -3,8 +3,8 @@ package com.da.digital.parser;
 import com.github.wnameless.json.flattener.JsonFlattener;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.da.digital.exception.OctopusErrorCode;
-import com.da.digital.exception.OctopusException;
+import com.da.digital.exception.DataAngosErrorCode;
+import com.da.digital.exception.DataAngosException;
 import com.da.digital.metadata.Constant;
 import com.da.digital.metadata.DataContainer;
 import org.apache.commons.io.FileUtils;
@@ -32,7 +32,7 @@ public class ParserUtil implements Serializable {
             metadataString = FileUtils.readFileToString(new File(fileName), StandardCharsets.UTF_8);
         } catch (IOException e) {
             logger.error(e.getMessage());
-            throw new OctopusException(OctopusErrorCode.FILE_PARSE_EXCEPTION);
+            throw new DataAngosException(DataAngosErrorCode.FILE_PARSE_EXCEPTION);
         }
         String[] lines = metadataString.split(Constant.NEW_LINE_SEPARATOR);
 

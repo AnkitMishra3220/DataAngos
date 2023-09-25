@@ -1,7 +1,7 @@
 package com.da.digital.processor;
 
 import com.da.digital.conf.KuduConfig;
-import com.da.digital.exception.OctopusException;
+import com.da.digital.exception.DataAngosException;
 import com.da.digital.metadata.Metadata;
 import com.da.digital.metadata.MetadataObj;
 import com.da.digital.parser.ParserFunction;
@@ -47,7 +47,7 @@ public class BatchXMLProcessor implements Processor<Dataset<Row>, Dataset<Row>> 
 
 
     @Override
-    public Dataset<Row> process(Dataset<Row> inputDS) throws OctopusException {
+    public Dataset<Row> process(Dataset<Row> inputDS) throws DataAngosException {
 
         List<String> fields = new ArrayList<>();
 

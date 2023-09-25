@@ -1,7 +1,7 @@
 package com.da.digital.processor;
 
 import com.da.digital.conf.*;
-import com.da.digital.exception.OctopusException;
+import com.da.digital.exception.DataAngosException;
 import com.da.digital.metadata.Constant;
 import com.da.digital.parser.ParserUtil;
 import com.da.digital.udf.DynamicJSONParser;
@@ -76,7 +76,7 @@ public class DefaultProcessor implements Processor<Dataset<Row>, Dataset<Row>> {
 
 
     @Override
-    public Dataset<Row> process(Dataset<Row> inputDS) throws OctopusException {
+    public Dataset<Row> process(Dataset<Row> inputDS) throws DataAngosException {
 
         if (!inputDS.isStreaming()) {
             JavaRDD<Row> inputRDD = inputDS.toJavaRDD();

@@ -1,8 +1,8 @@
 package com.da.digital.writer;
 
 import com.da.digital.conf.DFSConfig;
-import com.da.digital.exception.OctopusErrorCode;
-import com.da.digital.exception.OctopusException;
+import com.da.digital.exception.DataAngosErrorCode;
+import com.da.digital.exception.DataAngosException;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ public class DFSWriter implements Writer<Dataset<Row>>, Serializable {
     private WriterUtil writerUtil;
 
     @Override
-    public void write(Dataset<Row> output) throws OctopusException {
+    public void write(Dataset<Row> output) throws DataAngosException {
 
         switch (dfsConfig.getWriteFormat().toLowerCase()) {
             case "csv":
@@ -35,7 +35,7 @@ public class DFSWriter implements Writer<Dataset<Row>>, Serializable {
               writerUtil.executeTextWriter(output);
                 break;
             default:
-                throw new OctopusException(OctopusErrorCode.UNKNOWN_WRITER_FILE_FORMAT);
+                throw new DataAngosException(DataAngosErrorCode.UNKNOWN_WRITER_FILE_FORMAT);
         }
 
 

@@ -1,7 +1,7 @@
 package com.da.digital.processor;
 
 import com.da.digital.conf.ParsingConfig;
-import com.da.digital.exception.OctopusException;
+import com.da.digital.exception.DataAngosException;
 import com.da.digital.parser.ParserUtil;
 import com.da.digital.udf.DynamicJSONParser;
 import org.apache.spark.sql.Dataset;
@@ -29,7 +29,7 @@ public class DynamicJSONProcessor implements Processor<Dataset<Row>, Dataset<Row
     private String sourceRecordsContainsExpn;
 
     @Override
-    public Dataset<Row> process(Dataset<Row> input) throws OctopusException {
+    public Dataset<Row> process(Dataset<Row> input) throws DataAngosException {
 
         List<String> primaryKeys = parsingConfig.getPrimaryKeys();
 

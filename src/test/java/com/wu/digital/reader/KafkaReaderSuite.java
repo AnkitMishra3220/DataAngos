@@ -5,8 +5,8 @@ import com.da.digital.KafkaTestConfig;
 import com.da.digital.conf.AppConfig;
 import com.da.digital.conf.JobContext;
 import com.da.digital.conf.KafkaConfig;
-import com.da.digital.exception.OctopusErrorCode;
-import com.da.digital.exception.OctopusException;
+import com.da.digital.exception.DataAngosErrorCode;
+import com.da.digital.exception.DataAngosException;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
 import org.apache.spark.sql.streaming.OutputMode;
@@ -60,7 +60,7 @@ public class KafkaReaderSuite {
     private String inData = "";
 
     @Before
-    public void setUp() throws OctopusException, InterruptedException {
+    public void setUp() throws DataAngosException, InterruptedException {
 
         final Map<String, Object> senderProperties =
                 KafkaTestUtils.senderProps(embeddedKafka.getBrokersAsString());
@@ -78,11 +78,11 @@ public class KafkaReaderSuite {
             template.send(kafkaConfig.getInTopic(), key,inData).get();
         } catch (IOException e){
             logger.error(e.getMessage());
-            throw new OctopusException(OctopusErrorCode.IO_FILE_ERROR);
+            throw new DataAngosException(DataAngosErrorCode.IO_FILE_ERROR);
         }
         catch (ExecutionException e) {
             logger.error(e.getMessage());
-            throw new OctopusException(OctopusErrorCode.EXECUTION_EXCEPTION);
+            throw new DataAngosException(DataAngosErrorCode.EXECUTION_EXCEPTION);
         }
 
         kafkaReader.read()

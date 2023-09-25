@@ -2,7 +2,7 @@ package com.da.digital.writer;
 
 import com.da.digital.conf.AppConfig;
 import com.da.digital.conf.KuduConfig;
-import com.da.digital.exception.OctopusException;
+import com.da.digital.exception.DataAngosException;
 import org.apache.kudu.spark.kudu.KuduWriteOptions;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
@@ -22,7 +22,7 @@ public class KuduWriter implements Writer<Dataset<Row>>, Serializable {
     private AppConfig appConfig;
 
     @Override
-    public void write(Dataset<Row> output) throws OctopusException {
+    public void write(Dataset<Row> output) throws DataAngosException {
 
         KuduWriteOptions kuduWriteOption = new KuduWriteOptions(false, true);
         String kuduTableName = "impala::" + kuduConfig.getDatabaseName() + "." + kuduConfig.getOutTableName();

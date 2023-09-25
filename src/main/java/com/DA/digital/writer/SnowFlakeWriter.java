@@ -4,8 +4,8 @@ package com.da.digital.writer;
 import com.da.digital.conf.ContextSerialization;
 import com.da.digital.conf.SnowColumnsList;
 import com.da.digital.conf.SnowFlakeConfig;
-import com.da.digital.exception.OctopusErrorCode;
-import com.da.digital.exception.OctopusException;
+import com.da.digital.exception.DataAngosErrorCode;
+import com.da.digital.exception.DataAngosException;
 import com.da.digital.metadata.Constant;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
@@ -40,7 +40,7 @@ public class SnowFlakeWriter implements Writer<Dataset<Row>>, Serializable {
     private String enableErrorRoute;
 
     @Override
-    public void write(Dataset<Row> output) throws OctopusException {
+    public void write(Dataset<Row> output) throws DataAngosException {
 
         String checkpointLocation = "checkpointLocation";
         List<String> colList = snowColumnsList.getColList();
@@ -69,7 +69,7 @@ public class SnowFlakeWriter implements Writer<Dataset<Row>>, Serializable {
                     error.awaitTermination();
                 } catch (StreamingQueryException ex) {
                     logger.error(ex.getMessage());
-                    throw new OctopusException(OctopusErrorCode.SNOWFLAKE_STREAMING_ERROR);
+                    throw new DataAngosException(DataAngosErrorCode.SNOWFLAKE_STREAMING_ERROR);
                 }
                 break;
             case "false":
@@ -84,7 +84,7 @@ public class SnowFlakeWriter implements Writer<Dataset<Row>>, Serializable {
                             .start().awaitTermination();
                 } catch (StreamingQueryException e) {
                     logger.error(e.getMessage());
-                    throw new OctopusException(OctopusErrorCode.SNOWFLAKE_STREAMING_ERROR);
+                    throw new DataAngosException(DataAngosErrorCode.SNOWFLAKE_STREAMING_ERROR);
                 }
 
         }

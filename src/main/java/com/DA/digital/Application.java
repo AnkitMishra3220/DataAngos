@@ -1,6 +1,6 @@
 package com.da.digital;
 
-import com.da.digital.exception.OctopusException;
+import com.da.digital.exception.DataAngosException;
 import com.da.digital.processor.ProcessorFactory;
 import com.da.digital.reader.ReaderFactory;
 import com.da.digital.writer.WriterFactory;
@@ -30,7 +30,7 @@ public class Application implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws OctopusException {
+    public void run(String... args) throws DataAngosException {
 
         writerFactory.getWriterObject().write(processorFactory.process(readerFactory.getReaderObject().read()));
 

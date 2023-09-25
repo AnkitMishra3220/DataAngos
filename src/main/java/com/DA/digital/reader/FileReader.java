@@ -1,8 +1,8 @@
 package com.da.digital.reader;
 
 import com.da.digital.conf.FileConfig;
-import com.da.digital.exception.OctopusErrorCode;
-import com.da.digital.exception.OctopusException;
+import com.da.digital.exception.DataAngosErrorCode;
+import com.da.digital.exception.DataAngosException;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
@@ -19,7 +19,7 @@ public class FileReader implements Reader<Dataset<Row>> {
     private SparkSession spark;
 
     @Override
-    public Dataset<Row> read() throws OctopusException {
+    public Dataset<Row> read() throws DataAngosException {
 
         switch (fileConfig.getFileType()) {
             case "csv":
@@ -32,7 +32,7 @@ public class FileReader implements Reader<Dataset<Row>> {
             case "avro":
                 return spark.read().format(fileConfig.getFileType()).load(fileConfig.getInputFile());
             default:
-                throw new OctopusException(OctopusErrorCode.UNKNOWN_FILE_TYPE);
+                throw new DataAngosException(DataAngosErrorCode.UNKNOWN_FILE_TYPE);
 
         }
 

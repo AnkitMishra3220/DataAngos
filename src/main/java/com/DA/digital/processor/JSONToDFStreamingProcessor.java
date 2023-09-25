@@ -3,7 +3,7 @@ package com.da.digital.processor;
 import com.da.digital.conf.ContextSerialization;
 import com.da.digital.conf.SnowColumnsList;
 import com.da.digital.conf.SnowFlakeConfig;
-import com.da.digital.exception.OctopusException;
+import com.da.digital.exception.DataAngosException;
 import com.da.digital.utils.QueryUtils;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
@@ -36,12 +36,12 @@ public class JSONToDFStreamingProcessor implements Processor<Dataset<Row>, Datas
 
 
     @Override
-    public Dataset<Row> process(Dataset<Row> inputDS) throws OctopusException {
+    public Dataset<Row> process(Dataset<Row> inputDS) throws DataAngosException {
         return generateFlattenedDF(inputDS.selectExpr("CAST (value as STRING) AS value"));
     }
 
 
-    public Dataset<Row> generateFlattenedDF(Dataset<Row> inputDS) throws OctopusException {
+    public Dataset<Row> generateFlattenedDF(Dataset<Row> inputDS) throws DataAngosException {
 
         inputDS.createOrReplaceTempView(snowFlakeConfig.getOutTableName());
         List<String> snowFlakeColList = snowColumnsList.getColList();

@@ -1,8 +1,8 @@
 package com.da.digital.writer;
 
 import com.da.digital.conf.KafkaConfig;
-import com.da.digital.exception.OctopusErrorCode;
-import com.da.digital.exception.OctopusException;
+import com.da.digital.exception.DataAngosErrorCode;
+import com.da.digital.exception.DataAngosException;
 import com.da.digital.metadata.Constant;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
@@ -35,7 +35,7 @@ public class KafkaWriter implements Writer<Dataset<Row>>, Serializable {
 
 
     @Override
-    public void write(Dataset<Row> output) throws OctopusException {
+    public void write(Dataset<Row> output) throws DataAngosException {
 
         String topic = "topic";
         String checkpointLocation = "checkpointLocation";
@@ -68,7 +68,7 @@ public class KafkaWriter implements Writer<Dataset<Row>>, Serializable {
                     success.awaitTermination();
                 }catch (StreamingQueryException ex){
                     logger.error(ex.getMessage());
-                    throw new OctopusException(OctopusErrorCode.KAFKA_STREAMING_ERROR);
+                    throw new DataAngosException(DataAngosErrorCode.KAFKA_STREAMING_ERROR);
                 }
 
 
@@ -81,7 +81,7 @@ public class KafkaWriter implements Writer<Dataset<Row>>, Serializable {
                             .start().awaitTermination();
                 }catch (StreamingQueryException ex){
                     logger.error(ex.getMessage());
-                    throw new OctopusException(OctopusErrorCode.KAFKA_STREAMING_ERROR);
+                    throw new DataAngosException(DataAngosErrorCode.KAFKA_STREAMING_ERROR);
 
                 }
             }

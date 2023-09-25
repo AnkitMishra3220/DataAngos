@@ -1,8 +1,8 @@
 package com.da.digital.writer;
 
 import com.da.digital.conf.DFSConfig;
-import com.da.digital.exception.OctopusErrorCode;
-import com.da.digital.exception.OctopusException;
+import com.da.digital.exception.DataAngosErrorCode;
+import com.da.digital.exception.DataAngosException;
 import com.da.digital.metadata.Constant;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
@@ -79,7 +79,7 @@ public class WriterUtil {
         }
     }
 
-    public void executeParquetWriter(Dataset<Row> writerDS) throws OctopusException {
+    public void executeParquetWriter(Dataset<Row> writerDS) throws DataAngosException {
 
         String checkpointLocation = "checkpointLocation";
 
@@ -102,7 +102,7 @@ public class WriterUtil {
                         error.awaitTermination();
                     } catch (StreamingQueryException ex) {
                         logger.error(ex.getMessage());
-                        throw new OctopusException(OctopusErrorCode.KAFKA_STREAMING_ERROR);
+                        throw new DataAngosException(DataAngosErrorCode.KAFKA_STREAMING_ERROR);
                     }
                     break;
 
@@ -114,7 +114,7 @@ public class WriterUtil {
                     break;
 
                 default:
-                    throw new OctopusException(OctopusErrorCode.UNKNOWN_ERROR_ROUTE);
+                    throw new DataAngosException(DataAngosErrorCode.UNKNOWN_ERROR_ROUTE);
 
             }
 
@@ -131,7 +131,7 @@ public class WriterUtil {
                     break;
 
                 default:
-                    throw new OctopusException(OctopusErrorCode.UNKNOWN_ERROR_ROUTE);
+                    throw new DataAngosException(DataAngosErrorCode.UNKNOWN_ERROR_ROUTE);
             }
         }
 

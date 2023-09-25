@@ -2,11 +2,11 @@ package com.da.digital.exception;
 
 import java.io.Serializable;
 
-public class OctopusException extends RuntimeException implements Serializable {
+public class DataAngosException extends RuntimeException implements Serializable {
 
-    public OctopusException(OctopusErrorCode octopusErrorCode)
+    public DataAngosException(DataAngosErrorCode DataAngosErrorCode)
     {
-        super("{" + "octopusErrorCode:" +octopusErrorCode.getErrorCode()
-                + " octopusErrorMessage: " +octopusErrorCode.getErrorMessage() + "}");
+        super("{" + "DataAngosErrorCode:" +DataAngosErrorCode.getErrorCode()
+                + " DataAngosErrorMessage: " +DataAngosErrorCode.getErrorMessage() + "}");
     }
 }

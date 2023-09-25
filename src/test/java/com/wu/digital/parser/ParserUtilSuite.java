@@ -1,6 +1,6 @@
 package com.da.digital.parser;
 
-import com.da.digital.exception.OctopusException;
+import com.da.digital.exception.DataAngosException;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.junit.Before;
@@ -38,7 +38,7 @@ public class ParserUtilSuite {
     }
 
     @Test
-    public void testMappingJSON() throws OctopusException {
+    public void testMappingJSON() throws DataAngosException {
 
         Assert.assertEquals("{mtcn=transaction_csntransactionid, " +
                         "environment=transaction_environment, " +

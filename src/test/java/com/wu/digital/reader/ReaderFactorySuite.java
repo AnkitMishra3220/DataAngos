@@ -4,7 +4,7 @@ package com.da.digital.reader;
 import com.da.digital.conf.AppConfig;
 import com.da.digital.conf.DFSConfig;
 import com.da.digital.conf.JobContext;
-import com.da.digital.exception.OctopusException;
+import com.da.digital.exception.DataAngosException;
 import com.da.digital.metadata.Metadata;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
@@ -41,7 +41,7 @@ public class ReaderFactorySuite {
     private ReaderFactory readerFactory;
 
     @Test
-    public void testReaderFactory() throws OctopusException {
+    public void testReaderFactory() throws DataAngosException {
 
         Assert.assertEquals("com.da.digital.reader.DFSReader",readerFactory.getReaderObject().getClass().getName());
 

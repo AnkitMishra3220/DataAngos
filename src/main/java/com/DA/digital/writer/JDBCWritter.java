@@ -1,7 +1,7 @@
 package com.da.digital.writer;
 
 import com.da.digital.conf.OutputJDBCConfig;
-import com.da.digital.exception.OctopusException;
+import com.da.digital.exception.DataAngosException;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.security.alias.CredentialProviderFactory;
 import org.apache.spark.sql.Dataset;
@@ -25,7 +25,7 @@ public class JDBCWritter implements Writer<Dataset<Row>>, Serializable {
 
 
     @Override
-    public void write(Dataset<Row> output) throws OctopusException {
+    public void write(Dataset<Row> output) throws DataAngosException {
 
         Configuration conf = new Configuration();
         conf.set(CredentialProviderFactory.CREDENTIAL_PROVIDER_PATH, outputJDBCConfig.getOutJceksPath());
