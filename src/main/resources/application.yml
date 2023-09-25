@@ -14,7 +14,7 @@ appConfig:
 
 readerType: dfs
 processorType: default
-enableNS: true
+enableNS: false
 writerType: dfs
 errorFile:
 enableErrorRoute: false
